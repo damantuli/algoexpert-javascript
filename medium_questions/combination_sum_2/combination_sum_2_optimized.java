@@ -2,17 +2,16 @@ package combination_sum_2;
 
 import java.util.Arrays;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 class Solution {
-    public void findCombination2(int index, int[] candidates, int target, HashSet<List<Integer>> ans,
+    public void findCombination2(int index, int[] candidates, int target, List<List<Integer>> ans,
             List<Integer> ds) {
         if (target == 0) {
             ans.add(new ArrayList<>(ds));
             return;
         }
-        for (int i = 0; i < candidates.length; i++) {
+        for (int i = index; i < candidates.length; i++) {
             if (i > index && candidates[i] == candidates[i - 1])
                 continue;
             if (candidates[i] > target)
@@ -25,11 +24,10 @@ class Solution {
     }
 
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
-        HashSet<List<Integer>> ans = new HashSet<>();
+        List<List<Integer>> ans = new ArrayList<>();
         Arrays.sort(candidates);
         findCombination2(0, candidates, target, ans, new ArrayList<>());
-        List<List<Integer>> result = new ArrayList<>(ans);
-        return result;
+        return ans;
     }
 
 }
